@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UnitTests</RootNamespace>
     <AssemblyName>UnitTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,11 +36,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.4.0.0.0.Fakes">
-      <HintPath>FakesAssemblies\System.Web.4.0.0.0.Fakes.dll</HintPath>
+    <Reference Include="System.Web.v4.0.30319.v4.0.0.0.AMD64.Prig" Condition="'$(Platform)|$(Prefer32Bit)' == 'AnyCPU|false'" />
+    <Reference Include="Urasandesu.NAnonym">
+      <HintPath>..\packages\Prig.1.1.0\lib\net40\Urasandesu.NAnonym.dll</HintPath>
+    </Reference>
+    <Reference Include="Urasandesu.Prig.Framework">
+      <HintPath>..\packages\Prig.1.1.0\lib\net40\Urasandesu.Prig.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>
@@ -48,11 +55,7 @@
         <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
       </ItemGroup>
     </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
   <ItemGroup>
     <Compile Include="BackgroundTaskManagerUnitTests.cs" />
@@ -65,7 +68,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Fakes Include="Fakes\System.Web.fakes" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="System.Web.v4.0.30319.v4.0.0.0.prig">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
@@ -87,6 +95,23 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup Condition="'$(Platform)|$(Prefer32Bit)' == 'AnyCPU|false'">
+    <PreBuildEvent>cmd /c " "%VS120COMNTOOLS%VsDevCmd.bat" &amp; %windir%\SysNative\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -File "$(SolutionDir)packages\Prig.1.1.0\tools\Invoke-PilotStubber.ps1" -ReferenceFrom "@('$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.NAnonym.dll','$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.Prig.Framework.dll')" -AssemblyFrom "C:\Windows\Microsoft.Net\assembly\GAC_64\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll" -TargetFrameworkVersion v4.0 -KeyFile "$(SolutionDir)packages\Prig.1.1.0\tools\Urasandesu.Prig.snk" -OutputPath "$(TargetDir)." -Settings "$(ProjectDir)mscorlib.v4.0.30319.v4.0.0.0.prig" "
+cmd /c " "%VS120COMNTOOLS%VsDevCmd.bat" &amp; %windir%\SysNative\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -File "$(SolutionDir)packages\Prig.1.1.0\tools\Invoke-PilotStubber.ps1" -ReferenceFrom "@('$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.NAnonym.dll','$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.Prig.Framework.dll')" -AssemblyFrom "C:\Windows\Microsoft.Net\assembly\GAC_64\System.Web\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Web.dll" -TargetFrameworkVersion v4.0 -KeyFile "$(SolutionDir)packages\Prig.1.1.0\tools\Urasandesu.Prig.snk" -OutputPath "$(TargetDir)." -Settings "$(ProjectDir)System.Web.v4.0.30319.v4.0.0.0.prig" "
+cmd /c " "%VS120COMNTOOLS%VsDevCmd.bat" &amp; %windir%\SysNative\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -File "$(SolutionDir)packages\Prig.1.1.0\tools\Invoke-PilotStubber.ps1" -ReferenceFrom "@('$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.NAnonym.dll','$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.Prig.Framework.dll')" -AssemblyFrom "C:\Windows\Microsoft.Net\assembly\GAC_64\System.Web\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Web.dll" -TargetFrameworkVersion v4.0 -KeyFile "$(SolutionDir)packages\Prig.1.1.0\tools\Urasandesu.Prig.snk" -OutputPath "$(TargetDir)." -Settings "$(ProjectDir)System.Web.v4.0.30319.v4.0.0.0.prig" "</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)|$(Prefer32Bit)' == 'AnyCPU|true'">
+    <PreBuildEvent>cmd /c " "%VS120COMNTOOLS%VsDevCmd.bat" &amp; %windir%\system32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -File "$(SolutionDir)packages\Prig.1.1.0\tools\Invoke-PilotStubber.ps1" -ReferenceFrom "@('$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.NAnonym.dll','$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.Prig.Framework.dll')" -AssemblyFrom "C:\Windows\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll" -TargetFrameworkVersion v4.0 -KeyFile "$(SolutionDir)packages\Prig.1.1.0\tools\Urasandesu.Prig.snk" -OutputPath "$(TargetDir)." -Settings "$(ProjectDir)mscorlib.v4.0.30319.v4.0.0.0.prig" "
+cmd /c " "%VS120COMNTOOLS%VsDevCmd.bat" &amp; %windir%\system32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -File "$(SolutionDir)packages\Prig.1.1.0\tools\Invoke-PilotStubber.ps1" -ReferenceFrom "@('$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.NAnonym.dll','$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.Prig.Framework.dll')" -AssemblyFrom "C:\Windows\Microsoft.Net\assembly\GAC_32\System.Web\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Web.dll" -TargetFrameworkVersion v4.0 -KeyFile "$(SolutionDir)packages\Prig.1.1.0\tools\Urasandesu.Prig.snk" -OutputPath "$(TargetDir)." -Settings "$(ProjectDir)System.Web.v4.0.30319.v4.0.0.0.prig" "
+cmd /c " "%VS120COMNTOOLS%VsDevCmd.bat" &amp; %windir%\system32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -File "$(SolutionDir)packages\Prig.1.1.0\tools\Invoke-PilotStubber.ps1" -ReferenceFrom "@('$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.NAnonym.dll','$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.Prig.Framework.dll')" -AssemblyFrom "C:\Windows\Microsoft.Net\assembly\GAC_32\System.Web\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Web.dll" -TargetFrameworkVersion v4.0 -KeyFile "$(SolutionDir)packages\Prig.1.1.0\tools\Urasandesu.Prig.snk" -OutputPath "$(TargetDir)." -Settings "$(ProjectDir)System.Web.v4.0.30319.v4.0.0.0.prig" "</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>cmd /c " "%25VS120COMNTOOLS%25VsDevCmd.bat" &amp; %25windir%25\SysNative\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -File "$(SolutionDir)packages\Prig.1.1.0\tools\Invoke-PilotStubber.ps1" -ReferenceFrom "@('$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.NAnonym.dll','$(SolutionDir)packages\Prig.1.1.0\lib\net40\Urasandesu.Prig.Framework.dll')" -AssemblyFrom "C:\Windows\Microsoft.Net\assembly\GAC_64\System.Web\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Web.dll" -TargetFrameworkVersion v4.0 -KeyFile "$(SolutionDir)packages\Prig.1.1.0\tools\Urasandesu.Prig.snk" -OutputPath "$(TargetDir)." -Settings "$(ProjectDir)System.Web.v4.0.30319.v4.0.0.0.prig" "</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

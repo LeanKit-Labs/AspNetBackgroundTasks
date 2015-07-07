@@ -1,15 +1,12 @@
 <?xml version="1.0"?>
 <package >
-  <!-- cd .\AspNetBackgroundTasks; nuget pack -sym -->
   <metadata>
     <id>$id$</id>
     <version>$version$</version>
     <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
-    <projectUrl>https://github.com/StephenCleary/AspNetBackgroundTasks</projectUrl>
+    <authors>Stephen Cleary, Shawn Hartsell</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <tags>ASP.NET fire-and-forget background task</tags>
+    <tags>AspNetBackgroundTasks</tags>
   </metadata>
 </package>

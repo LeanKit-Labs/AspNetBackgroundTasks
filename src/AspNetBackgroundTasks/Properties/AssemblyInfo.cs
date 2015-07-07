@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ASP.NET Background Tasks")]
-[assembly: AssemblyDescription("A component that registers fire-and-forget tasks with the ASP.NET runtime.")]
-[assembly: AssemblyCompany("Stephen Cleary")]
-[assembly: AssemblyProduct("Nito.AspNetBackgroundTasks")]
+[assembly: AssemblyDescription("A .NET 4.0 port of Stephen Cleary's original project")]
+[assembly: AssemblyCompany("LeanKit")]
+[assembly: AssemblyProduct("AspNetBackgroundTasks")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

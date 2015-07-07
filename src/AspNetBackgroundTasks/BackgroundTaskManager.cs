@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using Nito.AspNetBackgroundTasks.Internal;
 
 namespace Nito.AspNetBackgroundTasks
@@ -22,15 +18,6 @@ namespace Nito.AspNetBackgroundTasks
         /// Gets a cancellation token that is set when ASP.NET is shutting down the app domain.
         /// </summary>
         public static CancellationToken Shutdown { get { return Instance.Shutdown; } }
-
-        /// <summary>
-        /// Executes an asynchronous background operation, registering it with ASP.NET.
-        /// </summary>
-        /// <param name="operation">The background operation.</param>
-        public static void Run(Func<Task> operation)
-        {
-            Instance.Run(operation);
-        }
 
         /// <summary>
         /// Executes a background operation, registering it with ASP.NET.

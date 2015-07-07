@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Hosting;
@@ -36,7 +33,7 @@ namespace Nito.AspNetBackgroundTasks.Internal
             // Start the count at 1 and decrement it when ASP.NET notifies us we're shutting down.
             _shutdown = new CancellationTokenSource();
             _count = new AsyncCountdownEvent(1);
-            _shutdown.Token.Register(() => _count.Signal(), useSynchronizationContext: false);
+            _shutdown.Token.Register(() => _count.Signal(), false);
 
             // Register the object.
             HostingEnvironment.RegisterObject(this);
@@ -59,7 +56,7 @@ namespace Nito.AspNetBackgroundTasks.Internal
         {
             _shutdown.Cancel();
 
-            if (immediate)
+            if (immediate) 
                 _done.Wait();
         }
 
@@ -79,21 +76,12 @@ namespace Nito.AspNetBackgroundTasks.Internal
         }
 
         /// <summary>
-        /// Executes an asynchronous background operation, registering it with ASP.NET.
-        /// </summary>
-        /// <param name="operation">The background operation.</param>
-        public void Run(Func<Task> operation)
-        {
-            Register(Task.Run(operation));
-        }
-
-        /// <summary>
         /// Executes a background operation, registering it with ASP.NET.
         /// </summary>
         /// <param name="operation">The background operation.</param>
         public void Run(Action operation)
         {
-            Register(Task.Run(operation));
+            Register(Task.Factory.StartNew(operation));
         }
     }
 }
