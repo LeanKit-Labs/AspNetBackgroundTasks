@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Hosting;
 
-namespace Nito.AspNetBackgroundTasks.Internal
+namespace LK.AspNetBackgroundTasks.Internal
 {
     /// <summary>
     /// A type that tracks background operations and notifies ASP.NET that they are still in progress.

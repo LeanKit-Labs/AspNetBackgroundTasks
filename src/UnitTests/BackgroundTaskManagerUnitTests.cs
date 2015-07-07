@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Hosting;
 using System.Web.Hosting.Prig;
-using Nito.AspNetBackgroundTasks.Internal;
+using LK.AspNetBackgroundTasks.Internal;
 using NUnit.Framework;
 using Urasandesu.Prig.Framework;
 

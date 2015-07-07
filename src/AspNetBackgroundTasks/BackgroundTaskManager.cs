@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
-using Nito.AspNetBackgroundTasks.Internal;
+using LK.AspNetBackgroundTasks.Internal;
 
-namespace Nito.AspNetBackgroundTasks
+namespace LK.AspNetBackgroundTasks
 {
     /// <summary>
     /// A type that tracks background operations and notifies ASP.NET that they are still in progress.

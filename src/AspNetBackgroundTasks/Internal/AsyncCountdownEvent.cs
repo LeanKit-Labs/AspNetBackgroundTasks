@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 // Original idea by Stephen Toub: http://blogs.msdn.com/b/pfxteam/archive/2012/02/11/10266930.aspx
 
-namespace Nito.AspNetBackgroundTasks.Internal
+namespace LK.AspNetBackgroundTasks.Internal
 {
     /// <summary>
     /// An async-compatible countdown event.
